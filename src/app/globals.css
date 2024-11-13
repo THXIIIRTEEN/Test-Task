@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+* {
+  font-family: Ubuntu;
+  color: black;
+}
+
+.label {
+  margin-bottom: 5px;
+}
+
+.bottomInput {
+  margin-bottom: 5px;
+}
+
+input {
+  width: 400px;
+  height: 25px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  padding: 0px 10px;
+  box-sizing: border-box;
+  border: solid 1px black;
+}
