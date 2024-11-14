@@ -148,8 +148,21 @@ export default function Home() {
       middlePoint.y >= firstRectangle.position.y - firstRectangle.size.height / 2 &&
       middlePoint.y <= firstRectangle.position.y + firstRectangle.size.height / 2
     ) {
-      middlePoint = {x: firstRectangle.position.x, y: secondRectangle.position.y}
-      startPoint = {x: firstRectangle.position.x, y: firstRectangle.position.y - firstRectangle.size.height / 2}
+      const index = path.length - 1;
+      middlePoint = {x: firstRectangle.position.x, y: secondRectangle.position.y};
+      
+      const bottomPoint = {x: firstRectangle.position.x, y: firstRectangle.position.y - firstRectangle.size.height / 2};
+      const topPoint = {x: firstRectangle.position.x, y: firstRectangle.position.y + firstRectangle.size.height / 2};
+      
+      const firstPath = calculateLineLength(bottomPoint, path[index]);
+      const secondPath = calculateLineLength(topPoint, path[index]);
+
+      if (firstPath < secondPath) {
+        startPoint = bottomPoint;
+      }
+      else if (firstPath > secondPath) {
+        startPoint = topPoint;
+      }
     }
     if (!startPoint) {
       path.splice(2, 0, middlePoint);
@@ -160,7 +173,7 @@ export default function Home() {
       path.splice(1, 1);
     }
     return path
-  }, [calculatePath, secondRectangle, firstRectangle])
+  }, [calculatePath, secondRectangle, firstRectangle, calculateLineLength])
 
   const drawRectangle = useCallback(() => {
     const canvas = canvasRef.current;
